@@ -31,6 +31,16 @@ func getStateMachine() *transition.StateMachine {
 	return orderStateMachine
 }
 
+func TestInitialize(t *testing.T) {
+	order := &Order{}
+	if err := getStateMachine().Initialize(order); err != nil {
+		t.Errorf("should not raise error when initializing object")
+	}
+	if order.State != "draft"  {
+		t.Errorf("should initialize state")
+	}
+}
+
 func TestStateTransition(t *testing.T) {
 	order := &Order{}
 

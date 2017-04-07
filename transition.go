@@ -60,6 +60,14 @@ func (sm *StateMachine) Event(name string) *Event {
 	return event
 }
 
+func (sm *StateMachine) Initialize(value Stater) error {
+	if value.GetState() != "" {
+		return fmt.Errorf("failed to initialize %v", value)
+	}
+	value.SetState(sm.initialState)
+	return nil
+}
+
 // Trigger trigger an event
 func (sm *StateMachine) Trigger(name string, value Stater) error {
 	var (
